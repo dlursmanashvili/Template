@@ -1,12 +1,13 @@
-﻿namespace Template.Service.IServices;
+﻿using Template.Model.Models.CommandModel;
+
+namespace Template.Service.IServices;
 
 public interface ITemplateService
 {
-    //    Task<AuthorResponse> CreateAuthor(CreateAuthorRequest createAuthorRequest);
-
-    //    Task<AuthorResponse> UpdateAuthor(EditAuthorRequest editAuthorRequest);
-    //    Task<bool> DeleteAuthor(DeleteAuthorRequest deleteAuthorRequest);
-    //    Task<IEnumerable<AuthorResponse>?> GetAllAuthors();
-    //    Task<AuthorResponse?> GetAuthorById(Guid id);
-    //    Task<IEnumerable<AuthorResponse>?> SearchAuthor(string FirsName);
+    Task<TemplateResponse> CreateTemplate(CreateTemplateRequest createTemplateRequest);
+    Task<TemplateResponse> UpdateTemplate(EditTemplateRequest editTemplateRequest);
+    Task<bool> DeleteTemplate(DeleteTemplateRequest deleteTemplateRequest);
+    Task<IEnumerable<TemplateResponse>?> GetAllTemplates();
+    Task<TemplateResponse?> GetTemplateById(Guid id);
+    //Task<IEnumerable<TemplateResponse>?> SearchTemplate(Guid id);
 }

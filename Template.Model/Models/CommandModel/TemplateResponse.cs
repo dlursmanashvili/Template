@@ -7,6 +7,6 @@ public class TemplateResponse
 
     }
     public Guid Id { get; set; }
-    public string Firstname { get; set; }
-    public string LastName { get; set; }
+    public string Text { get; set; }
+    
 }

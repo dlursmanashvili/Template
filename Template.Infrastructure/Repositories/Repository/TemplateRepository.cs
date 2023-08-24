@@ -14,11 +14,11 @@ public class TemplateRepository : RepositoryBase<TemplateModel>, ITemplateReposi
 
     public async override Task<IEnumerable<TemplateModel>> LoadAsync()
     {
-        var authors = await _context.Templates.Where(x => !x.IsDeleted).ToListAsync();
+        var Template = await _context.Templates.Where(x => !x.IsDeleted).ToListAsync();
 
-        if (authors == null)
-            throw new NotFoundException("Authors Not Found");
+        if (Template == null)
+            throw new NotFoundException("Template Not Found");
 
-        return authors;
+        return Template;
     }
 }

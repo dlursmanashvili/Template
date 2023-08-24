@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Template.Model.Models.CommandModel;
+﻿namespace Template.Model.Models.CommandModel;
 
 public class CreateTemplateRequest
 {
-    public string Firstname { get; set; }
-    public string LastName { get; set; }
-
-    public DateTime BirthDate { get; set; }
+    public string text { get; set; }
 
 }
 
