@@ -24,7 +24,7 @@ namespace Template.Api.Controllers
         public async Task<IActionResult> Create(CreateTemplateRequest createTemplateRequest)
         {
             var result = await _templateService.CreateTemplate(createTemplateRequest);
-            return CreatedAtAction("GetAll", result);
+            return new JsonResult(result);
         }
 
         /// <summary>     
