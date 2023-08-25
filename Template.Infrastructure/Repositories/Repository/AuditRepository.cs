@@ -10,6 +10,4 @@ public class AuditRepository : RepositoryBase<AuditModel>, IAuditRepository
     public AuditRepository(ApplicationDbContext context) : base(context)
     {
     }
-
-
 }

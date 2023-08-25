@@ -109,12 +109,12 @@ public class TemplateService : ITemplateService
         else { throw new BadRequestException(); }
     }
 
-    public async Task<TemplateResponse?> GetTemplateById(Guid id)
+    public async Task<TemplateResponse?> GetTemplateById(GetTemplateRequest getTemplateRequest)
     {
         var commandresult = await _AuditService.CreateAudit(new AuditModel()
         {
             Id = Guid.NewGuid(),
-            UserName = " ",
+            UserName = getTemplateRequest.UserName,
             ActionType = ActionType.GetOne,
             ModelType = ModelType.GetTemplate,
             Entity = EntityName.Template,
@@ -122,9 +122,9 @@ public class TemplateService : ITemplateService
         });
         if (commandresult.IsSuccess)
         {
-            var template = await _TemplateRepository.GetByIdAsync(id) ?? throw new Exception("Template not found");
+            var template = await _TemplateRepository.GetByIdAsync(getTemplateRequest.TemplateId) ?? throw new Exception("Template not found");
 
-            return new TemplateResponse() { Id = id, Text = template.Text };
+            return new TemplateResponse() { Id = getTemplateRequest.TemplateId, Text = template.Text };
         }
         else { throw new BadRequestException(); }
 

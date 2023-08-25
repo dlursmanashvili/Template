@@ -9,6 +9,6 @@ public interface ITemplateService
     Task<TemplateResponse> UpdateTemplate(EditTemplateRequest editTemplateRequest);
     Task<bool> DeleteTemplate(DeleteTemplateRequest deleteTemplateRequest);
     Task<IEnumerable<TemplateResponse>?> GetAllTemplates(string UserName);
-    Task<TemplateResponse?> GetTemplateById(Guid id);
+    Task<TemplateResponse?> GetTemplateById(GetTemplateRequest getTemplateRequest);
     //Task<IEnumerable<TemplateResponse>?> SearchTemplate(Guid id);
 }

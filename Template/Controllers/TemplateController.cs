@@ -40,12 +40,12 @@ namespace Template.Api.Controllers
         /// <summary>
         /// Gets current Template text by given Id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="getTemplateRequest"></param>
         [HttpGet]
-        [Route("GetTemplateById/{id}")]
+        [Route("GetTemplateById")]
         [ProducesResponseType(typeof(TemplateResponse), 200)]
-        public async Task<IActionResult> GetById(Guid id)
-          => Ok(await _templateService.GetTemplateById(id));
+        public async Task<IActionResult> GetById([FromQuery]GetTemplateRequest getTemplateRequest)
+          => Ok(await _templateService.GetTemplateById(getTemplateRequest));
 
         /// <summary>
         /// Gets list of Template text.
