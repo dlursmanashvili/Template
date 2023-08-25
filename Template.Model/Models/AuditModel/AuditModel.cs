@@ -4,7 +4,6 @@ namespace Template.Model.Models.AuditModel;
 
 public class AuditModel : BaseEntity<Guid>
 {
-    public string ModelId { get; set; }
     public string UserName { get; set; }
     public ActionType ActionType { get; set; }
     public ModelType ModelType { get; set; }

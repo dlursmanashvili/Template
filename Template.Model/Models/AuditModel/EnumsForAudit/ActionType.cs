@@ -10,5 +10,7 @@ public enum ActionType
 {
     Create,
     Update,
-    Delete
+    Delete,
+    GetAll,
+    GetOne
 }

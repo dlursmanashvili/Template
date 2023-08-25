@@ -49,11 +49,12 @@ namespace Template.Api.Controllers
         /// <summary>
         /// Gets list of Template text.
         /// </summary>
+        /// <param name="UserName"></param>
         [HttpGet]
-        [Route("GetAllTemplates")]
+        [Route("GetAllTemplates/{UserName}")]
         [ProducesResponseType(typeof(TemplateResponse), 200)]
-        public async Task<IActionResult> GetAll()
-            => Ok(await _templateService.GetAllTemplates());
+        public async Task<IActionResult> GetAll(string UserName)
+            => Ok(await _templateService.GetAllTemplates(UserName));
 
         /// <summary>
         /// Deletes Template text.

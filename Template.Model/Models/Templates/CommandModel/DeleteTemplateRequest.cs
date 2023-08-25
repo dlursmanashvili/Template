@@ -3,4 +3,6 @@
 public class DeleteTemplateRequest
 {
     public Guid Id { get; set; }
+    public string UserName { get; set; }
+
 }
