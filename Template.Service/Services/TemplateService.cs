@@ -129,8 +129,8 @@ public class TemplateService : ITemplateService
             return new TemplateResponse() { Id = getTemplateRequest.TemplateId, Text = template.Text };
         }
         else { throw new BadRequestException(); }
-
     }
+
     public async Task<TemplateResponse> UpdateTemplate(EditTemplateRequest editTemplateRequest)
     {
         var commandresult = await _AuditService.CreateAudit(new AuditModel()
@@ -145,9 +145,9 @@ public class TemplateService : ITemplateService
         if (commandresult.IsSuccess)
         {
             var template = await _TemplateRepository.GetByIdAsync(editTemplateRequest.Id);
-            if (template == null || template.IsDeleted) { throw new BadImageFormatException("template not found"); }
+            if (template == null || template.IsDeleted) { throw new NotFoundException("template not found"); }
 
-            template.Text = editTemplateRequest.Text;
+            template.Text = TextHelper.CheckNewText(editTemplateRequest.Text);
 
             await _TemplateRepository.UpdateAsync(template);
 
@@ -155,4 +155,54 @@ public class TemplateService : ITemplateService
         }
         else { throw new BadRequestException(); }
     }
+
+    public async Task<Dictionary<string, string>?> GetKeysFromTextAsync(GetTemplateRequest getTemplateRequest)
+    {
+        var reuslt = await GetTemplateById(getTemplateRequest);
+
+        var commandresult = await _AuditService.CreateAudit(new AuditModel()
+        {
+            Id = Guid.NewGuid(),
+            UserName = getTemplateRequest.UserName,
+            ActionType = ActionType.GetOne,
+            ModelType = ModelType.GetTemplateDictionary,
+            Entity = EntityName.Template,
+            ActionDate = DateTime.Now,
+        });
+
+        if (commandresult.IsSuccess)
+        {
+            return TextHelper.ReturnDictionaryKeysFromText(reuslt.Text);
+
+        }
+        else { throw new BadRequestException(); }
+
+    }
+    public async Task<TemplateResponse> GetGenerateTExt(GenerateTextRequest generateTextRequest)
+    {
+        var request = new GetTemplateRequest() { TemplateId = generateTextRequest.TemplateId, UserName = generateTextRequest.UserName };
+        var reuslt = await GetTemplateById(request);
+        var commandresult = await _AuditService.CreateAudit(new AuditModel()
+        {
+            Id = Guid.NewGuid(),
+            UserName = generateTextRequest.UserName,
+            ActionType = ActionType.GetOne,
+            ModelType = ModelType.GenerateTemplate,
+            Entity = EntityName.Template,
+            ActionDate = DateTime.Now,
+        });
+
+        if (commandresult.IsSuccess)
+        {
+            return new TemplateResponse()
+            {
+                Text = TextHelper.GetGeneratedAndCangedText(reuslt.Text, generateTextRequest.FromText),
+                Id = reuslt.Id
+            };
+
+        }
+        else { throw new BadRequestException(); }
+    }
+
+
 }

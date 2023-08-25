@@ -27,8 +27,6 @@ public static class TextHelper
         return CutTextList;
     }
 
-
-
     public static List<string> CutText(string text)
     {
         if (text.IsNullOrEmpty())
@@ -101,12 +99,11 @@ public static class TextHelper
 
     public static IEnumerable<string> ValidateText(List<string> CutTextList)
     {
-
         for (int i = 0; i < CutTextList.Count; i++)
         {
             if (CheckTtext(CutTextList[i]).Any(x => x == '<' || x == '>'))
             {
-                throw new BadRequestException($"{CheckTtext(CutTextList[i])} text does not meet the standard. Please edit the text");
+                throw new Exception($"            '{CheckTtext(CutTextList[i].ToString())}'           text does not meet the standard. Please edit the text\n\n\n\n");
             }
             else
             {
@@ -134,14 +131,37 @@ public static class TextHelper
         }
         return text;
     }
+
+
+    public static Dictionary<string, string>? ReturnDictionaryKeysFromText(string text)
+    {
+        var textlist = CutText(text);
+        ValidateText(textlist);
+        var dictionary = new Dictionary<string, string>();
+        for (int i = 0; i < textlist.Count; i++)
+        {
+            if (textlist[i].ToCharArray().Length > 2 && textlist[i].ToCharArray()[0] == '<' && textlist[i].ToCharArray().Last() == '>')
+            {
+                string modifiedItem = textlist[i].Substring(1, textlist[i].Length - 2);
+                if (!dictionary.ContainsKey(modifiedItem))
+                    dictionary.Add(modifiedItem, "");
+            }
+        }
+        return dictionary;
+    }
+
+    public static string GetGeneratedAndCangedText(string text, Dictionary<string, string> listofCahngedWord)
+    {
+        var Cuttext = CutText(text);
+        ValidateText(Cuttext);
+        return GetCutTextSum(GetChangedlist(Cuttext, listofCahngedWord));
+    }
+
     /// <summary>
-    /// ფუნქცია დაჭრის, შეამოწმებს თუ ტექსტი ვალიდურია მაშინ დააბრუნებს გადაცემულ ტექსტს
+    /// ფუნქცია დაჭრის, შეამოწმებს ტექსტ თუ ტექსტი ვალიდურია მაშინ დააბრუნებს გადაცემულ ტექსტს
     /// </summary>
     public static string CheckNewText(string text)
     {
         return GetCutTextSum(ValidateText(CutText(text)));
     }
-
-  
-
 }

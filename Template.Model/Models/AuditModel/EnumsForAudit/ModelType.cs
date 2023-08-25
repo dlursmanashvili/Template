@@ -7,4 +7,5 @@ public enum ModelType
     DeleteTemplate = 3,
     GetTemplate = 4,
     GenerateTemplate = 5,
+    GetTemplateDictionary = 6,
 }

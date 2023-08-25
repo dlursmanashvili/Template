@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Template.Model.Models.Templates.CommandModel;
+﻿using Template.Model.Models.Templates.CommandModel;
 
 namespace Template.Service.IServices;
 
@@ -10,5 +9,6 @@ public interface ITemplateService
     Task<bool> DeleteTemplate(DeleteTemplateRequest deleteTemplateRequest);
     Task<IEnumerable<TemplateResponse>?> GetAllTemplates(string UserName);
     Task<TemplateResponse?> GetTemplateById(GetTemplateRequest getTemplateRequest);
-    //Task<IEnumerable<TemplateResponse>?> SearchTemplate(Guid id);
+    Task<Dictionary<string, string>?> GetKeysFromTextAsync(GetTemplateRequest getTemplateRequest);
+    Task<TemplateResponse> GetGenerateTExt(GenerateTextRequest generateTextRequest);
 }

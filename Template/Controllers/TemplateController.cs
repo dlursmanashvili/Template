@@ -48,6 +48,26 @@ namespace Template.Api.Controllers
           => Ok(await _templateService.GetTemplateById(getTemplateRequest));
 
         /// <summary>
+        /// Gets current Template keys for values by given Id.
+        /// </summary>
+        /// <param name="getTemplateRequest"></param>
+        [HttpGet]
+        [Route("GetKeysFromTextAsync")]
+        [ProducesResponseType(typeof(TemplateResponse), 200)]
+        public async Task<IActionResult> GetDictionaryFromText([FromQuery] GetTemplateRequest getTemplateRequest)
+          => Ok(await _templateService.GetKeysFromTextAsync(getTemplateRequest));
+
+        /// <summary>
+        ///Generate Text.
+        /// </summary>
+        /// <param name="generateTextRequest"></param>
+        [HttpGet]
+        [Route("GetGenerateText")]
+        [ProducesResponseType(typeof(TemplateResponse), 200)]
+        public async Task<IActionResult> GetGenerateText([FromQuery] GenerateTextRequest generateTextRequest) /// gasasworebelia
+          => Ok(await _templateService.GetGenerateTExt(generateTextRequest));
+
+        /// <summary>
         /// Gets list of Template text.
         /// </summary>
         /// <param name="UserName"></param>
