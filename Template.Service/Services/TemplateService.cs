@@ -1,4 +1,5 @@
 ﻿using Audit.Service.IServices;
+using Template.Infrastructure.HelperClass;
 using Template.Infrastructure.Repositories.Interfaces;
 using Template.Model.Exceptions;
 using Template.Model.Models.AuditModel;
@@ -21,10 +22,11 @@ public class TemplateService : ITemplateService
 
     public async Task<TemplateResponse> CreateTemplate(CreateTemplateRequest createTemplateRequest)
     {
+
         var template = new TemplateModel()
         {
             Id = Guid.NewGuid(),
-            Text = createTemplateRequest.text,
+            Text = TextHelper.CheckNewText(createTemplateRequest.text),
             IsDeleted = false,
         };
         if (createTemplateRequest.text == null || createTemplateRequest.text == " ")
@@ -45,7 +47,7 @@ public class TemplateService : ITemplateService
             if (result.IsSuccess)
             {
                 await _TemplateRepository.AddAsync(template);
-                return new TemplateResponse() { Text = createTemplateRequest.text, Id = template.Id };
+                return new TemplateResponse() { Text = template.Text, Id = template.Id };
             }
             else
             {
@@ -151,6 +153,6 @@ public class TemplateService : ITemplateService
 
             return new TemplateResponse() { Text = template.Text, Id = template.Id };
         }
-        else { throw new BadRequestException();}
+        else { throw new BadRequestException(); }
     }
 }

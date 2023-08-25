@@ -1,4 +1,7 @@
-﻿namespace Template.Infrastructure.HelperClass;
+﻿using Microsoft.IdentityModel.Tokens;
+using Template.Model.Exceptions;
+
+namespace Template.Infrastructure.HelperClass;
 
 public static class TextHelper
 {
@@ -24,8 +27,15 @@ public static class TextHelper
         return CutTextList;
     }
 
-    public static List<string>? CeckAndCutText(string text)
+
+
+    public static List<string> CutText(string text)
     {
+        if (text.IsNullOrEmpty())
+        {
+            throw new BadRequestException();
+        }
+
         char[] punctuationMarks = { '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '=', '?', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~' };
 
         var listOfWord = new List<string>();
@@ -88,4 +98,50 @@ public static class TextHelper
         }
         return listOfWord;
     }
+
+    public static IEnumerable<string> ValidateText(List<string> CutTextList)
+    {
+
+        for (int i = 0; i < CutTextList.Count; i++)
+        {
+            if (CheckTtext(CutTextList[i]).Any(x => x == '<' || x == '>'))
+            {
+                throw new BadRequestException($"{CheckTtext(CutTextList[i])} text does not meet the standard. Please edit the text");
+            }
+            else
+            {
+                yield return CutTextList[i];
+            }
+        }
+    }
+
+    public static string CheckTtext(string CutTextItem)
+    {
+        if (CutTextItem.ToCharArray().Length > 2 && CutTextItem.ToCharArray()[0] == '<' && CutTextItem.ToCharArray().Last() == '>')
+        {
+            string modifiedItem = CutTextItem.Substring(1, CutTextItem.Length - 2);
+            return modifiedItem;
+        }
+        return CutTextItem;
+    }
+
+    public static string GetCutTextSum(IEnumerable<string> strings)
+    {
+        var text = "";
+        foreach (string s in strings)
+        {
+            text += s;
+        }
+        return text;
+    }
+    /// <summary>
+    /// ფუნქცია დაჭრის, შეამოწმებს თუ ტექსტი ვალიდურია მაშინ დააბრუნებს გადაცემულ ტექსტს
+    /// </summary>
+    public static string CheckNewText(string text)
+    {
+        return GetCutTextSum(ValidateText(CutText(text)));
+    }
+
+  
+
 }
