@@ -11,33 +11,5 @@ public class AuditRepository : RepositoryBase<AuditModel>, IAuditRepository
     {
     }
 
-    public Task AddAsync(AuditModel entity)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<AuditModel?> GetByIdAsync(object id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<AuditModel>> LoadAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task RemoveAsync(AuditModel entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task RemoveById(object id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(AuditModel entity)
-    {
-        throw new NotImplementedException();
-    }
 }

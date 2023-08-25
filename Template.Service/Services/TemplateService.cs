@@ -57,7 +57,7 @@ public class TemplateService : ITemplateService
     public async Task<bool> DeleteTemplate(DeleteTemplateRequest deleteTemplateRequest)
     {
         var template = await _TemplateRepository.GetByIdAsync(deleteTemplateRequest.Id);
-        if (template != null || template.IsDeleted) { throw new BadImageFormatException("template not found"); }
+        if (template == null || template.IsDeleted) { throw new BadImageFormatException("template not found"); }
 
         template.IsDeleted = true;
 
@@ -143,7 +143,7 @@ public class TemplateService : ITemplateService
         if (commandresult.IsSuccess)
         {
             var template = await _TemplateRepository.GetByIdAsync(editTemplateRequest.Id);
-            if (template != null || template.IsDeleted) { throw new BadImageFormatException("template not found"); }
+            if (template == null || template.IsDeleted) { throw new BadImageFormatException("template not found"); }
 
             template.Text = editTemplateRequest.Text;
 

@@ -20,14 +20,15 @@ namespace Template.Api.Controllers
         /// </summary>
         /// <param name="createTemplateRequest"></param>
         [HttpPost]
-        [ProducesResponseType(typeof(TemplateResponse), 201)]
+        [ProducesResponseType(typeof(TemplateResponse), 201)] // abrunebs 500 gasasworebelia
         public async Task<IActionResult> Create(CreateTemplateRequest createTemplateRequest)
         {
             var result = await _templateService.CreateTemplate(createTemplateRequest);
             return CreatedAtAction("GetAll", result);
         }
 
-        /// <summary>        /// Updates info about Template text.
+        /// <summary>     
+        /// Updates info about Template text.
         /// </summary>
         /// <param name="editTemplateRequest"></param>        
         [HttpPut]
