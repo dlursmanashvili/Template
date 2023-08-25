@@ -2,7 +2,7 @@
 using Template.Infrastructure.DataBaseHelper;
 using Template.Infrastructure.Repositories.Interfaces;
 using Template.Model.Exceptions;
-using Template.Model.Models;
+using Template.Model.Models.Templates;
 
 namespace Template.Infrastructure.Repositories.Repository;
 

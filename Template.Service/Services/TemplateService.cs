@@ -1,7 +1,8 @@
 ﻿using Template.Infrastructure.Repositories.Interfaces;
 using Template.Model.Exceptions;
 using Template.Model.Models;
-using Template.Model.Models.CommandModel;
+using Template.Model.Models.Templates;
+using Template.Model.Models.Templates.CommandModel;
 using Template.Service.IServices;
 
 namespace Template.Service.Services;

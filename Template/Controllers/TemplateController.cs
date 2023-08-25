@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Template.Model.Models.CommandModel;
+using Template.Model.Models.Templates.CommandModel;
 using Template.Service.IServices;
 
-namespace Library.Api.Controllers
+namespace Template.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

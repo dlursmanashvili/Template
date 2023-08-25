@@ -1,4 +1,4 @@
-﻿namespace Template.Model.Models.CommandModel;
+﻿namespace Template.Model.Models.Templates.CommandModel;
 
 public class EditTemplateRequest
 {

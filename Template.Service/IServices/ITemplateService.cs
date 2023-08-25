@@ -1,4 +1,4 @@
-﻿using Template.Model.Models.CommandModel;
+﻿using Template.Model.Models.Templates.CommandModel;
 
 namespace Template.Service.IServices;
 

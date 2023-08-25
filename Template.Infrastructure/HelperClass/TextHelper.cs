@@ -1,4 +1,4 @@
-﻿namespace Template.Service.ServiceHelper;
+﻿namespace Template.Infrastructure.HelperClass;
 
 public static class TextHelper
 {
@@ -26,7 +26,7 @@ public static class TextHelper
 
     public static List<string>? CeckAndCutText(string text)
     {
-        char[] punctuationMarks = {'!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/',':', ';', '=',  '?',  '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'};
+        char[] punctuationMarks = { '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '=', '?', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~' };
 
         var listOfWord = new List<string>();
         string word = "";

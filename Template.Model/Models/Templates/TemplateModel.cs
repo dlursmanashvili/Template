@@ -1,4 +1,4 @@
-﻿namespace Template.Model.Models;
+﻿namespace Template.Model.Models.Templates;
 
 public class TemplateModel : BaseEntity<Guid>
 {

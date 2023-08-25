@@ -1,4 +1,4 @@
-﻿namespace Template.Model.Models.CommandModel;
+﻿namespace Template.Model.Models.Templates.CommandModel;
 
 public class TemplateResponse
 {
@@ -8,5 +8,5 @@ public class TemplateResponse
     }
     public Guid Id { get; set; }
     public string Text { get; set; }
-    
+
 }
