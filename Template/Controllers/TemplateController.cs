@@ -61,10 +61,10 @@ namespace Template.Api.Controllers
         ///Generate Text.
         /// </summary>
         /// <param name="generateTextRequest"></param>
-        [HttpGet]
+        [HttpPost]
         [Route("GetGenerateText")]
         [ProducesResponseType(typeof(TemplateResponse), 200)]
-        public async Task<IActionResult> GetGenerateText([FromQuery] GenerateTextRequest generateTextRequest) /// gasasworebelia
+        public async Task<IActionResult> GetGenerateText([FromBody] GenerateTextRequest generateTextRequest) 
           => Ok(await _templateService.GetGenerateTExt(generateTextRequest));
 
         /// <summary>
