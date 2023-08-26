@@ -12,10 +12,12 @@ public static class DI
 {
     public static void DependecyResolver(this IServiceCollection services)
     {
-        services.AddScoped<ITemplateService, TemplateService>();
+        services.AddScoped<ISmsTemplateService, SmsTemplateService>();
+        services.AddScoped<IEmailTemplateService, EmailTemplateService>();
         services.AddScoped<IAuditService, AuditService>();
 
-        services.AddScoped<ITemplateRepository, TemplateRepository>();
+        services.AddScoped<IEmailTemplateRepository, EmailTemplateRepository>();
+        services.AddScoped<ISmsTemplateReporistory, SmsTemplateReporistory>();
         services.AddScoped<IAuditRepository, AuditRepository>();
     }
 }

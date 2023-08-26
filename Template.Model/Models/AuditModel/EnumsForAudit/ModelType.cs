@@ -2,10 +2,16 @@
 
 public enum ModelType
 {
-    AddTemplate = 1,
-    EditTemplate = 2,
-    DeleteTemplate = 3,
-    GetTemplate = 4,
-    GenerateTemplate = 5,
-    GetTemplateDictionary = 6,
+    EmailAddTemplate = 1,
+    EmailEditTemplate = 2,
+    EmailDeleteTemplate = 3,
+    EmailGetTemplate = 4,
+    EmailGenerateTemplate = 5,
+    EmailGetTemplateDictionary = 6,
+    SmsAddTemplate = 7,
+    SmsEditTemplate = 8,
+    SmsDeleteTemplate = 9,
+    SmsGetTemplate = 10,
+    SmsGenerateTemplate = 11,
+    SmsGetTemplateDictionary = 12,
 }

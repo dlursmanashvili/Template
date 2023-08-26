@@ -6,15 +6,15 @@ using Template.Model.Models.Templates;
 
 namespace Template.Infrastructure.Repositories.Repository;
 
-public class TemplateRepository : RepositoryBase<TemplateModel>, ITemplateRepository
+public class EmailTemplateRepository : RepositoryBase<EmailTemplateModel>, IEmailTemplateRepository
 {
-    public TemplateRepository(ApplicationDbContext context) : base(context)
+    public EmailTemplateRepository(ApplicationDbContext context) : base(context)
     {
     }
 
-    public async override Task<IEnumerable<TemplateModel>> LoadAsync()
+    public async override Task<IEnumerable<EmailTemplateModel>> LoadAsync()
     {
-        var Template = await _context.Templates.Where(x => !x.IsDeleted).ToListAsync();
+        var Template = await _context.EmailTemplates.Where(x => !x.IsDeleted).ToListAsync();
 
         if (Template == null)
             throw new NotFoundException("Template Not Found");

@@ -2,7 +2,7 @@
 
 namespace Template.Service.IServices;
 
-public interface ITemplateService
+public interface IEmailTemplateService
 {
     Task<TemplateResponse> CreateTemplate(CreateTemplateRequest createTemplateRequest);
     Task<TemplateResponse> UpdateTemplate(EditTemplateRequest editTemplateRequest);

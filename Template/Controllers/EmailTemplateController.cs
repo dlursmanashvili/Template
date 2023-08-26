@@ -6,11 +6,11 @@ namespace Template.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TemplateController : ControllerBase
+    public class EmailTemplateController : ControllerBase
     {
-        private readonly ITemplateService _templateService;
+        private readonly IEmailTemplateService _templateService;
 
-        public TemplateController(ITemplateService templateService)
+        public EmailTemplateController(IEmailTemplateService templateService)
         {
             _templateService = templateService;
         }

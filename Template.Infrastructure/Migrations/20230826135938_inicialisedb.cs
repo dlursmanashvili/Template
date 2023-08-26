@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Template.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class add_audit_Tebale : Migration
+    public partial class inicialisedb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,6 @@ namespace Template.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModelId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActionType = table.Column<int>(type: "int", nullable: false),
                     ModelType = table.Column<int>(type: "int", nullable: false),
@@ -28,6 +27,32 @@ namespace Template.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Audits", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "EmailTemplates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmailTemplates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SmslTemplates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SmslTemplates", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -35,6 +60,12 @@ namespace Template.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Audits");
+
+            migrationBuilder.DropTable(
+                name: "EmailTemplates");
+
+            migrationBuilder.DropTable(
+                name: "SmslTemplates");
         }
     }
 }

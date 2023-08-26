@@ -52,7 +52,7 @@ namespace Template.Infrastructure.Migrations
                     b.ToTable("Audits");
                 });
 
-            modelBuilder.Entity("Template.Model.Models.Templates.TemplateModel", b =>
+            modelBuilder.Entity("Template.Model.Models.Templates.EmailTemplateModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,7 +67,25 @@ namespace Template.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Templates");
+                    b.ToTable("EmailTemplates");
+                });
+
+            modelBuilder.Entity("Template.Model.Models.Templates.SmsTemplateModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SmslTemplates");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,11 +10,11 @@ using Template.Service.IServices;
 
 namespace Template.Service.Services;
 
-public class TemplateService : ITemplateService
+public class EmailTemplateService : IEmailTemplateService
 {
-    private readonly ITemplateRepository _TemplateRepository;
+    private readonly IEmailTemplateRepository _TemplateRepository;
     private readonly IAuditService _AuditService;
-    public TemplateService(ITemplateRepository templateRepository, IAuditService auditService)
+    public EmailTemplateService(IEmailTemplateRepository templateRepository, IAuditService auditService)
     {
         _TemplateRepository = templateRepository;
         _AuditService = auditService;
@@ -23,7 +23,7 @@ public class TemplateService : ITemplateService
     public async Task<TemplateResponse> CreateTemplate(CreateTemplateRequest createTemplateRequest)
     {
 
-        var template = new TemplateModel()
+        var template = new EmailTemplateModel()
         {
             Id = Guid.NewGuid(),
             Text = TextHelper.CheckNewText(createTemplateRequest.text),
@@ -40,7 +40,7 @@ public class TemplateService : ITemplateService
                 Id = Guid.NewGuid(),
                 UserName = createTemplateRequest.UserName,
                 ActionType = ActionType.Create,
-                ModelType = ModelType.AddTemplate,
+                ModelType = ModelType.EmailAddTemplate,
                 Entity = EntityName.Template,
                 ActionDate = DateTime.Now,
             });
@@ -59,7 +59,7 @@ public class TemplateService : ITemplateService
     public async Task<bool> DeleteTemplate(DeleteTemplateRequest deleteTemplateRequest)
     {
         var template = await _TemplateRepository.GetByIdAsync(deleteTemplateRequest.Id);
-        if (template == null || template.IsDeleted) { throw new BadImageFormatException("template not found"); }
+        if (template == null || template.IsDeleted) { throw new NotFoundException("template not found"); }
 
         template.IsDeleted = true;
 
@@ -68,7 +68,7 @@ public class TemplateService : ITemplateService
             Id = Guid.NewGuid(),
             UserName = deleteTemplateRequest.UserName,
             ActionType = ActionType.Delete,
-            ModelType = ModelType.DeleteTemplate,
+            ModelType = ModelType.EmailDeleteTemplate,
             Entity = EntityName.Template,
             ActionDate = DateTime.Now,
         });
@@ -90,7 +90,7 @@ public class TemplateService : ITemplateService
             Id = Guid.NewGuid(),
             UserName = UserName,
             ActionType = ActionType.GetAll,
-            ModelType = ModelType.GetTemplate,
+            ModelType = ModelType.EmailGetTemplate,
             Entity = EntityName.Template,
             ActionDate = DateTime.Now,
         });
@@ -118,7 +118,7 @@ public class TemplateService : ITemplateService
             Id = Guid.NewGuid(),
             UserName = getTemplateRequest.UserName,
             ActionType = ActionType.GetOne,
-            ModelType = ModelType.GetTemplate,
+            ModelType = ModelType.EmailGetTemplate,
             Entity = EntityName.Template,
             ActionDate = DateTime.Now,
         });
@@ -137,8 +137,8 @@ public class TemplateService : ITemplateService
         {
             Id = Guid.NewGuid(),
             UserName = editTemplateRequest.UserName,
-            ActionType = ActionType.GetAll,
-            ModelType = ModelType.GetTemplate,
+            ActionType = ActionType.Update,
+            ModelType = ModelType.EmailEditTemplate,
             Entity = EntityName.Template,
             ActionDate = DateTime.Now,
         });
@@ -165,7 +165,7 @@ public class TemplateService : ITemplateService
             Id = Guid.NewGuid(),
             UserName = getTemplateRequest.UserName,
             ActionType = ActionType.GetOne,
-            ModelType = ModelType.GetTemplateDictionary,
+            ModelType = ModelType.EmailGetTemplateDictionary,
             Entity = EntityName.Template,
             ActionDate = DateTime.Now,
         });
@@ -187,7 +187,7 @@ public class TemplateService : ITemplateService
             Id = Guid.NewGuid(),
             UserName = generateTextRequest.UserName,
             ActionType = ActionType.GetOne,
-            ModelType = ModelType.GenerateTemplate,
+            ModelType = ModelType.EmailGenerateTemplate,
             Entity = EntityName.Template,
             ActionDate = DateTime.Now,
         });

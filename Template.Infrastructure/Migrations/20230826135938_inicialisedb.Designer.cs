@@ -12,8 +12,8 @@ using Template.Infrastructure.DataBaseHelper;
 namespace Template.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230825141003_add_audit_Tebale")]
-    partial class add_audit_Tebale
+    [Migration("20230826135938_inicialisedb")]
+    partial class inicialisedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,10 +43,6 @@ namespace Template.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ModelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ModelType")
                         .HasColumnType("int");
 
@@ -59,7 +55,7 @@ namespace Template.Infrastructure.Migrations
                     b.ToTable("Audits");
                 });
 
-            modelBuilder.Entity("Template.Model.Models.Templates.TemplateModel", b =>
+            modelBuilder.Entity("Template.Model.Models.Templates.EmailTemplateModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +70,25 @@ namespace Template.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Templates");
+                    b.ToTable("EmailTemplates");
+                });
+
+            modelBuilder.Entity("Template.Model.Models.Templates.SmsTemplateModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SmslTemplates");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,6 +8,7 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    public DbSet<TemplateModel> Templates { get; set; }
+    public DbSet<EmailTemplateModel> EmailTemplates { get; set; }
+    public DbSet<SmsTemplateModel>  SmslTemplates { get; set; }
     public DbSet<AuditModel> Audits { get; set; }
 }

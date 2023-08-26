@@ -1,6 +1,6 @@
 ﻿namespace Template.Model.Models.Templates;
 
-public class TemplateModel : BaseEntity<Guid>
+public class SmsTemplateModel : BaseEntity<Guid>
 {
     public string Text { get; set; }
 }
